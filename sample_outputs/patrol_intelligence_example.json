@@ -1,0 +1,66 @@
+{
+  "report_id": "patrol_intel_20250106",
+  "period": {
+    "start": "2025-01-06T06:00:00Z",
+    "end": "2025-01-06T18:00:00Z",
+    "duration_hours": 12,
+    "location": "North Gate Complex"
+  },
+  "ai_generated_summary": "Morning patrol (06:00-09:00) showed baseline activity with 3-5 persons average. Mid-shift surge at 12:30-13:30 with peak crowd of 35 persons (likely shift changeover). Afternoon (14:00-18:00) returned to baseline. One suspicious loitering incident flagged at 15:45 with extended observation - individual cleared after ID verification. No weapons or contraband detected across all 12 hours.",
+  "key_events": [
+    {
+      "timestamp": "2025-01-06T06:30:00Z",
+      "type": "normal_activity",
+      "description": "Morning patrol begins - light traffic, 3 persons",
+      "severity": "low"
+    },
+    {
+      "timestamp": "2025-01-06T12:30:00Z",
+      "type": "crowd_surge",
+      "description": "Shift change - crowd increased from 5 to 25 persons rapidly",
+      "severity": "medium",
+      "action_taken": "increased_monitoring"
+    },
+    {
+      "timestamp": "2025-01-06T13:15:00Z",
+      "type": "peak_crowd",
+      "description": "Peak crowd density reached: 35 persons at gate",
+      "severity": "medium",
+      "duration_minutes": 20,
+      "action_taken": "crowd_control_standby"
+    },
+    {
+      "timestamp": "2025-01-06T15:45:00Z",
+      "type": "suspicious_activity",
+      "description": "Individual loitering with surveillance behavior",
+      "severity": "high",
+      "action_taken": "officer_dispatched_verified_cleared"
+    }
+  ],
+  "patterns_identified": [
+    "Regular shift-change surge between 12:00-14:00",
+    "Morning baseline: 3-5 persons, stable",
+    "Evening baseline: 2-4 persons, stable",
+    "No anomalies in vehicle detection",
+    "No weapons or contraband detected"
+  ],
+  "risk_indicators": {
+    "threat_level": "low",
+    "false_positive_rate": 0.08,
+    "confidence_overall": 0.91,
+    "notes": "One suspicious activity alert resolved. System confidence high for baseline activity."
+  },
+  "recommendations": [
+    "Continue standard monitoring for morning and evening shifts",
+    "Consider pre-posting officers during 12:00-14:00 shift change window",
+    "Review past loitering incidents for pattern correlation",
+    "Monitor south gate area - historical data shows higher false positives there",
+    "Increase camera coverage at blind spots (southwest corner)"
+  ],
+  "resource_optimization": {
+    "peak_staffing_recommendation": "2-3 additional officers during 12:00-14:00 window",
+    "normal_staffing": "1 officer sufficient with AI monitoring",
+    "cost_savings": "AI monitoring reduces need for 24/7 manual observation"
+  },
+  "next_shift_briefing": "Light activity expected. One person previously flagged at south gate - cleared without incident. Continue routine monitoring with focus on 12:00-14:00 shift-change protocol."
+}

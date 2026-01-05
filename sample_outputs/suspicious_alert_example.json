@@ -1,0 +1,71 @@
+{
+  "timestamp": "2025-01-06T15:45:30Z",
+  "camera_id": "gate_south_02",
+  "alert_id": "alert_20250106_001",
+  "alert_type": "suspicious_activity",
+  "severity": "high",
+  "status": "escalated",
+  "confidence": 0.92,
+  "activity_description": "Individual loitering at south gate for extended period with frequent looking around",
+  "detections": [
+    {
+      "timestamp": "2025-01-06T15:30:00Z",
+      "label": "person",
+      "confidence": 0.98,
+      "position": "south_gate_entrance",
+      "action": "stationary_standing"
+    },
+    {
+      "timestamp": "2025-01-06T15:35:00Z",
+      "label": "person",
+      "confidence": 0.97,
+      "position": "south_gate_entrance",
+      "action": "head_turning_surveillance"
+    },
+    {
+      "timestamp": "2025-01-06T15:40:00Z",
+      "label": "person",
+      "confidence": 0.96,
+      "position": "south_gate_entrance",
+      "action": "pacing_behavior"
+    },
+    {
+      "timestamp": "2025-01-06T15:45:00Z",
+      "label": "person",
+      "confidence": 0.99,
+      "position": "south_gate_entrance",
+      "action": "bag_manipulation"
+    }
+  ],
+  "heuristic_flags": [
+    "loitering_duration: 15+ minutes",
+    "head_turning_pattern: high frequency",
+    "bag_interaction: suspicious",
+    "no_entry_attempt: unusual for gate location"
+  ],
+  "rag_context": [
+    {
+      "historical_event": "Similar loitering behavior led to ID check - individual cleared",
+      "date": "2024-12-20",
+      "outcome": "false_positive",
+      "similarity_score": 0.78
+    },
+    {
+      "historical_event": "Loitering + bag manipulation → theft attempt prevented",
+      "date": "2024-11-15",
+      "outcome": "true_positive",
+      "similarity_score": 0.85
+    }
+  ],
+  "recommended_actions": [
+    "Dispatch officer for ID verification and questioning",
+    "Request individual move away from gate entrance",
+    "Check for warrant or past incidents",
+    "Monitor video feed for escalation"
+  ],
+  "escalation_info": {
+    "escalated_to": "south_gate_control_room",
+    "officer_assigned": "OFC-2847",
+    "est_arrival_time": "2 minutes"
+  }
+}

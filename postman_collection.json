@@ -1,0 +1,554 @@
+{
+  "info": {
+    "name": "CopMap Police AI System",
+    "description": "API collection for AI-Driven Patrol & Bandobast Automation",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "System Health",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": [""]
+            }
+          }
+        },
+        {
+          "name": "System Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/status",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["status"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Detection & Image Processing",
+      "item": [
+        {
+          "name": "Detect Objects (Low Crowd)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": ""
+                },
+                {
+                  "key": "camera_id",
+                  "value": "gate_north_01",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:8000/detect",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["detect"]
+            },
+            "description": "Upload image for object detection. Returns detections, person count, and alerts."
+          }
+        },
+        {
+          "name": "Detect Objects (Medium Crowd ~8 persons)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": ""
+                },
+                {
+                  "key": "camera_id",
+                  "value": "gate_north_01",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:8000/detect",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["detect"]
+            },
+            "description": "Should trigger 'medium' crowd density alert (6-11 persons)"
+          }
+        },
+        {
+          "name": "Detect Objects (High Crowd ~15 persons)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": ""
+                },
+                {
+                  "key": "camera_id",
+                  "value": "gate_north_01",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:8000/detect",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["detect"]
+            },
+            "description": "Should trigger 'high' crowd density alert (12+ persons)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Event Ingestion",
+      "item": [
+        {
+          "name": "Ingest - Normal Activity",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"Morning patrol at north gate: normal activity, 3-5 persons observed\",\n  \"camera_id\": \"gate_north_01\",\n  \"timestamp\": \"2025-01-06T06:30:00Z\",\n  \"metadata\": {\n    \"officer_id\": \"OFC-2847\",\n    \"shift\": \"morning\",\n    \"weather\": \"clear\"\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/ingest",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["ingest"]
+            }
+          }
+        },
+        {
+          "name": "Ingest - Crowd Surge",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"Shift change at 12:30 - crowd increased rapidly to 25+ persons. Appeared to be routine handover.\",\n  \"camera_id\": \"gate_north_01\",\n  \"timestamp\": \"2025-01-06T12:30:00Z\",\n  \"metadata\": {\n    \"officer_id\": \"OFC-2847\",\n    \"alert_type\": \"crowd_surge\",\n    \"severity\": \"medium\"\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/ingest",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["ingest"]
+            }
+          }
+        },
+        {
+          "name": "Ingest - Suspicious Activity",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"Individual loitering at south gate entrance for extended period with frequent surveillance behavior. Observed with backpack, occasionally checking surroundings.\",\n  \"camera_id\": \"gate_south_02\",\n  \"timestamp\": \"2025-01-06T15:45:00Z\",\n  \"metadata\": {\n    \"officer_id\": \"OFC-2848\",\n    \"alert_type\": \"suspicious_activity\",\n    \"severity\": \"high\",\n    \"action_taken\": \"dispatch_for_verification\"\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/ingest",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["ingest"]
+            }
+          }
+        },
+        {
+          "name": "Ingest - Weapon Observed",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"URGENT: Potential weapon-like object observed at checkpoint north. Individual attempting to conceal object. Immediate verification needed.\",\n  \"camera_id\": \"checkpoint_north\",\n  \"timestamp\": \"2025-01-06T16:00:00Z\",\n  \"metadata\": {\n    \"officer_id\": \"OFC-2849\",\n    \"alert_type\": \"weapon_alert\",\n    \"severity\": \"critical\",\n    \"action_taken\": \"immediate_response\"\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/ingest",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["ingest"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Suspicious Activity Detection",
+      "item": [
+        {
+          "name": "Flag Suspicious - Loitering",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"Individual loitering at entrance for 15+ minutes with suspicious surveillance behavior\",\n  \"camera_id\": \"gate_south_02\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/suspicious",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["suspicious"]
+            },
+            "description": "Flag suspicious activity with heuristic analysis"
+          }
+        },
+        {
+          "name": "Flag Suspicious - Weapon",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"Individual with potential weapon at checkpoint - armed and dangerous\",\n  \"camera_id\": \"checkpoint_north\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/suspicious",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["suspicious"]
+            },
+            "description": "Should return HIGH severity alert"
+          }
+        },
+        {
+          "name": "Flag Suspicious - Unauthorized Access",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"Unauthorized breach attempt at restricted area - individual attempting to climb fence\",\n  \"camera_id\": \"perimeter_fence_02\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/suspicious",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["suspicious"]
+            },
+            "description": "Should return HIGH severity with immediate action recommendations"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Summarization & Intelligence",
+      "item": [
+        {
+          "name": "Summarize - Patrol Events (General)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/summarize?q=patrol%20events&top_k=5",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["summarize"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "patrol events"
+                },
+                {
+                  "key": "top_k",
+                  "value": "5"
+                }
+              ]
+            },
+            "description": "Get LLM summary of recent patrol events"
+          }
+        },
+        {
+          "name": "Summarize - Suspicious Activities",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/summarize?q=suspicious%20loitering%20threats&top_k=5",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["summarize"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "suspicious loitering threats"
+                },
+                {
+                  "key": "top_k",
+                  "value": "5"
+                }
+              ]
+            },
+            "description": "Get summary of suspicious activities"
+          }
+        },
+        {
+          "name": "Summarize - Crowd Analysis",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/summarize?q=crowd%20density%20surge%20patterns&top_k=5",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["summarize"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "crowd density surge patterns"
+                },
+                {
+                  "key": "top_k",
+                  "value": "5"
+                }
+              ]
+            },
+            "description": "Get intelligence summary on crowd behavior"
+          }
+        },
+        {
+          "name": "Summarize - Shift Briefing",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/summarize?q=shift%20summary%20incidents%20recommendations&top_k=10",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["summarize"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "shift summary incidents recommendations"
+                },
+                {
+                  "key": "top_k",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Get comprehensive shift briefing summary"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Integration Tests",
+      "item": [
+        {
+          "name": "Full Workflow - Detection to Ingest",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": ""
+                },
+                {
+                  "key": "camera_id",
+                  "value": "gate_north_01",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:8000/detect",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["detect"]
+            },
+            "description": "Step 1: Detect objects in image → Then ingest the result"
+          }
+        },
+        {
+          "name": "Full Workflow - Ingest to Summarize",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"Test event for integration\",\n  \"camera_id\": \"test_cam\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/ingest",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["ingest"]
+            },
+            "description": "Step 1: Ingest event → Then run summarize endpoint"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Error Handling Tests",
+      "item": [
+        {
+          "name": "Test - Invalid Image Format",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "text",
+                  "value": "not_an_image"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:8000/detect",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["detect"]
+            },
+            "description": "Should return 400 error"
+          }
+        },
+        {
+          "name": "Test - Missing Required Field",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"metadata\": {}}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/ingest",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["ingest"]
+            },
+            "description": "Should return 400 error for missing 'text' field"
+          }
+        },
+        {
+          "name": "Test - Invalid top_k Parameter",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/summarize?q=test&top_k=100",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["summarize"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "test"
+                },
+                {
+                  "key": "top_k",
+                  "value": "100"
+                }
+              ]
+            },
+            "description": "Should return 400 error (top_k max is 20)"
+          }
+        }
+      ]
+    }
+  ]
+}
