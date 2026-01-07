@@ -3,6 +3,12 @@
 A practical system to assist police operations with image-based crowd and object analysis, event logging, and intelligence summaries.
 
 ---
+Video demo : https://drive.google.com/file/d/14Je9AAe5lwTW5XcpUyM3Y_rtD4C5kMi3/view?usp=sharing
+<img width="1912" height="840" alt="Screenshot 2026-01-07 201923" src="https://github.com/user-attachments/assets/015c98a5-e0c0-4c93-8517-14b1408d3c1d" />
+
+<img width="1883" height="874" alt="Screenshot 2026-01-07 201854" src="https://github.com/user-attachments/assets/c4337a3b-9d3e-4ef0-af1f-912e3126ae71" />
+
+<img width="1743" height="572" alt="Screenshot 2026-01-07 201911" src="https://github.com/user-attachments/assets/81144b29-0394-4d89-bb19-6c311ddfb748" />
 
 ## Problem Understanding
 
